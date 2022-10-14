@@ -4,6 +4,7 @@ import './Task.css'
 import {ReactComponent as Active} from '../../../assets/svg/active.svg'
 import {ReactComponent as Blocked} from '../../../assets/svg/blocked.svg'
 import {ReactComponent as Completed} from '../../../assets/svg/completed.svg'
+import { NavLink, Link } from 'react-router-dom'
 
 function Task(props) {
     let StatusIcon = (status) => {
@@ -11,12 +12,17 @@ function Task(props) {
         if(status === "blocked") return <Blocked />
         if(status === "completed") return <Completed />
     } 
+    
+    const url = `${props.title}`.toLowerCase().replaceAll(" ", "-")
+
 
     return (
-        <Wrapper>
-                {StatusIcon(props.status)}
-                <span className={props.status}>{props.title}</span>
-        </Wrapper>
+        <NavLink to={props.status === "blocked" ? '#' : url}>
+            <Wrapper>
+                    {StatusIcon(props.status)}
+                    <span className={props.status}>{props.title}</span>
+            </Wrapper>
+        </NavLink>
     )
 }
 
