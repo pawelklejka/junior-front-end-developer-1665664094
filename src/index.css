@@ -8,6 +8,15 @@
   overflow: hidden;
 }
 
+:root{
+  /* MAIN COLORS */
+  --white: #FFFFFF;
+  --grey: #F4F5F7;
+  --blue-text: #0165FF;
+  --grey-text: #6B778C;
+  --black-text: #242325;
+}
+
 body {
   height: 100vh;
   margin: 0;
