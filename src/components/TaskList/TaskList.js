@@ -11,7 +11,7 @@ function TaskList(props) {
         </Header>
         <TaskListWrapper>
             {props.context.map(task => {
-                return <Task status={task.status} title={task.title} businessContexts={props.businessContexts} />
+                return <Task status={task.status} title={task.title} />
             })}  
         </TaskListWrapper>
     </Wrapper>

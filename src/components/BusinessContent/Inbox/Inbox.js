@@ -9,7 +9,7 @@ function Inbox(props) {
        {props.context.map((context, index) => {
           return (
             <>
-                      <InboxElement context={context} key={index}/>
+              <InboxElement context={context} key={index}/>
             </>
 
           )

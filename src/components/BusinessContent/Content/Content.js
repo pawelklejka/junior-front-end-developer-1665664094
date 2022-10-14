@@ -1,23 +1,33 @@
 import React from 'react'
+import { useLocation } from 'react-router'
 import styled from 'styled-components'
+import { convertTitleToUrl } from '../../../utils/convertTitleToUrl'
 import { dateFormatter } from '../../../utils/dateFormatter'
 import Avatar from '../../Menu/Avatar/Avatar'
 
 function Content(props) {
   const currentHour = `${new Date().getHours()}:${new Date().getMinutes()}` 
   const date = dateFormatter(`${props.context.created_at}`, 'full')
+
+  const url = useLocation()
+  console.log(url);
+  console.log(props.context);
+  const pathNamewWithRemovedDash = url.pathname.substring(1)
+  let context = props.context.find(d => convertTitleToUrl(d.title) == pathNamewWithRemovedDash)
+  console.log(context);
+
   return (
     <Wrapper>
-      <Title>{props.context.title}</Title>
+      <Title>{context[0].title}</Title>
         <ContentWrapper>
           <Header>
               <Avatar/>
             <Author>
-              {props.context.author}
+              {context.author}
             </Author>
             <span>    •   Today, {date}   •   {currentHour}</span>
           </Header>
-          <Description>{props.context.content}</Description>  
+          <Description>{context.content}</Description>  
         </ContentWrapper>  
     </Wrapper>
   )

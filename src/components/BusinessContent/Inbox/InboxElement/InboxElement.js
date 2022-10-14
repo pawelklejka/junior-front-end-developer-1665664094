@@ -2,19 +2,30 @@ import React from 'react'
 import styled from 'styled-components'
 import './InboxElement.css'
 import { dateFormatter } from '../../../../utils/dateFormatter'
+import { useLocation } from 'react-router'
+import { Link, NavLink } from 'react-router-dom'
 
 function InboxElement(props) {
+    const punctuationMarksRegex = /[.,\s]/g
+    const businessContextPath = `${props.context.title}`.toLowerCase().replaceAll(" ", "-").replaceAll(punctuationMarksRegex, '')
+    const url = `${businessContextPath}`
 
+    const onClickChangeStatus = (event) => {
+        event.preventDefault()
+        props.context.isNew = "false"
+    }
 
 
     //change 'true' when adding fetch data from outside source to true
   return (
-    <Wrapper className={props.context.readStatus}>
-        <Header>{props.context.isNew === 'true' ? <Label><span>new</span></Label> : null} <span>{props.context.author}    •   {dateFormatter(props.context.created_at, 'short')}</span> </Header>
-        <Content>
-            <Title >{props.context.title}</Title>
-            <Description>{props.context.content}</Description>
-        </Content>
+    <Wrapper className={props.context.readStatus} onClick={event => onClickChangeStatus(event)}>
+        <NavLink to={url}>
+            <Header>{props.context.isNew === 'true' ? <Label><span>new</span></Label> : null} <span>{props.context.author}    •   {dateFormatter(props.context.created_at, 'short')}</span> </Header>
+            <Content>
+                <Title >{props.context.title}</Title>
+                <Description>{props.context.content}</Description>
+            </Content>
+        </NavLink>
     </Wrapper>
   )
 }

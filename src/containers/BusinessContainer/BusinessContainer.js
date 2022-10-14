@@ -3,12 +3,16 @@ import styled from 'styled-components'
 import BusinessContent from '../../components/BusinessContent/BusinessContent'
 import TaskList from '../../components/TaskList/TaskList'
 import data from '../../components/TaskList/task-list.json'
+import { Route, Routes } from 'react-router'
 
 function BusinessContainer() {
   return (
     <Wrapper>
         <TaskList context={data}/>
-        <BusinessContent context={data[0].businessContexts}/>
+        <Routes >
+          <Route path=":contextId" element={<BusinessContent context={data}/>} >
+          </Route>
+        </Routes>
     </Wrapper>
   )
 }
