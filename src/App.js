@@ -1,13 +1,16 @@
 import './App.css';
-import TaskList from './components/TaskList/TaskList';
 import BusinessContainer from './containers/BusinessContainer/BusinessContainer';
+import Menu from './components/Menu/Menu';
+import Footer from './components/Footer/Footer';
+
 
 function App() {
   return (
-    <div className="App">
-        
-        <BusinessContainer />
-    </div>
+      <div className="App">
+          <Menu />
+          <BusinessContainer />
+          <Footer />
+      </div>
   );
 }
 

@@ -6,7 +6,6 @@ import {ReactComponent as Blocked} from '../../../assets/svg/blocked.svg'
 import {ReactComponent as Completed} from '../../../assets/svg/completed.svg'
 
 function Task(props) {
-
     let StatusIcon = (status) => {
         if(status === "active") return <Active />
         if(status === "blocked") return <Blocked />
@@ -15,8 +14,8 @@ function Task(props) {
 
     return (
         <Wrapper>
-            {StatusIcon(props.status)}
-            <span className={props.status}>{props.title}</span>
+                {StatusIcon(props.status)}
+                <span className={props.status}>{props.title}</span>
         </Wrapper>
     )
 }
@@ -43,5 +42,7 @@ const Wrapper = styled.div`
     }
     svg{
         margin-right: 0.5rem;
+        min-width: 17px;
+        min-height: 17px;
     }
 `

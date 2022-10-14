@@ -1,0 +1,11 @@
+.not-read{
+    background-color: var(--white);
+    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
+}
+.open{
+    background-color: var(--white);
+    box-shadow: 0px 8px 16px rgba(84, 84, 84, 0.2);
+}
+.read{
+    background-color: var(--grey);
+}
