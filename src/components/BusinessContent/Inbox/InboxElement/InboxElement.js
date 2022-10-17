@@ -2,41 +2,40 @@ import React from 'react'
 import styled from 'styled-components'
 import './InboxElement.css'
 import { dateFormatter } from '../../../../utils/dateFormatter'
-import { useLocation } from 'react-router'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import { convertTitleToUrl } from '../../../../utils/convertTitleToUrl'
 
 function InboxElement(props) {
-    const punctuationMarksRegex = /[.,\s]/g
-    const businessContextPath = `${props.context.title}`.toLowerCase().replaceAll(" ", "-").replaceAll(punctuationMarksRegex, '')
-    const url = `${businessContextPath}`
+    const url = `${convertTitleToUrl(props.context.title)}`
 
-    const onClickChangeStatus = (event) => {
-        event.preventDefault()
+    const onClickChangeStatus = () => {
         props.context.isNew = "false"
+        props.context.readStatus = 'read'
     }
+
 
 
     //change 'true' when adding fetch data from outside source to true
   return (
-    <Wrapper className={props.context.readStatus} onClick={event => onClickChangeStatus(event)}>
-        <NavLink to={url}>
+        <NavLink to={url} className={({isActive}) => isActive ? 'inbox-element open' : `inbox-element ${props.context.readStatus}`} onClick={event => onClickChangeStatus(event)}>
             <Header>{props.context.isNew === 'true' ? <Label><span>new</span></Label> : null} <span>{props.context.author}    •   {dateFormatter(props.context.created_at, 'short')}</span> </Header>
             <Content>
                 <Title >{props.context.title}</Title>
                 <Description>{props.context.content}</Description>
             </Content>
         </NavLink>
-    </Wrapper>
   )
 }
 
 export default InboxElement
 
 const Wrapper = styled.div`
-  height: 130px;
-  margin: 1rem;
-  padding: 1rem;
-  border-radius: 8px;
+
+  a:active{
+    height: 100%;
+    margin: 100%;
+
+  }
 `
 
 const Header = styled.div`

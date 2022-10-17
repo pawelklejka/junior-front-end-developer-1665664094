@@ -1,21 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import Content from '../Content/Content'
 import InboxElement from './InboxElement/InboxElement'
 
 function Inbox(props) {
   return (
     <Wrapper>
-       {props.context.map((context, index) => {
-          return (
-            <>
-              <InboxElement context={context} key={index}/>
-            </>
-
-          )
-
-      })}
-
+       {props.context.map((context, index) => <InboxElement context={context} key={index}/>)}
     </Wrapper>
   )
 }

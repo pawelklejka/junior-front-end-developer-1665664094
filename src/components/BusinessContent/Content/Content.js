@@ -1,33 +1,29 @@
 import React from 'react'
-import { useLocation } from 'react-router'
+import { useOutletContext } from 'react-router'
 import styled from 'styled-components'
 import { convertTitleToUrl } from '../../../utils/convertTitleToUrl'
 import { dateFormatter } from '../../../utils/dateFormatter'
 import Avatar from '../../Menu/Avatar/Avatar'
 
-function Content(props) {
+function Content() {
+  const {context, businessContextPath} = useOutletContext()
   const currentHour = `${new Date().getHours()}:${new Date().getMinutes()}` 
-  const date = dateFormatter(`${props.context.created_at}`, 'full')
-
-  const url = useLocation()
-  console.log(url);
-  console.log(props.context);
-  const pathNamewWithRemovedDash = url.pathname.substring(1)
-  let context = props.context.find(d => convertTitleToUrl(d.title) == pathNamewWithRemovedDash)
-  console.log(context);
+  
+  let businessContext = context.find(d => convertTitleToUrl(d.title) == businessContextPath)
+  const date = dateFormatter(`${businessContext.created_at}`, 'full')
 
   return (
     <Wrapper>
-      <Title>{context[0].title}</Title>
+      <Title>{businessContext.title}</Title>
         <ContentWrapper>
           <Header>
               <Avatar/>
             <Author>
-              {context.author}
+              {businessContext.author}
             </Author>
             <span>    •   Today, {date}   •   {currentHour}</span>
           </Header>
-          <Description>{context.content}</Description>  
+          <Description>{businessContext.content}</Description>  
         </ContentWrapper>  
     </Wrapper>
   )
